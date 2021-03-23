@@ -1,0 +1,12 @@
+{
+  "name": "autofill extension",
+  "version": "1.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "/pages/signin.html",
+    "default_title": "autofill extension"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
