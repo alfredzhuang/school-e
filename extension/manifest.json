@@ -1,12 +1,14 @@
 {
-  "name": "autofill extension",
+  "name": "extension",
   "version": "1.0",
   "manifest_version": 2,
+  "key": "",
   "browser_action": {
     "default_popup": "/pages/signin.html",
-    "default_title": "autofill extension"
+    "default_title": "extension"
   },
   "background": {
-    "scripts": ["background.js"]
-  }
+    "scripts": ["background.js", "jsrsasign-all-min.js"]
+  },
+  "permissions": ["identity"]
 }
