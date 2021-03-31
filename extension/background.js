@@ -49,6 +49,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               { popup: "/pages/signedin.html" },
               function () {
                 signed_in = true;
+                // Add to database
                 fetch("http://localhost:3000/login", {
                   method: "GET",
                   headers: {
@@ -73,10 +74,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       return true;
     }
   } else if (request.message === "logout") {
+    // Log the user out
     chrome.browserAction.setPopup({ popup: "/pages/signin.html" }, function () {
       signed_in = false;
       sendResponse("success");
     });
     return true;
+  } else if (request.message === "addclass") {
+    // Add the class to database
+    console.log(request.className + " " + request.classLink);
+    sendResponse("success");
   }
 });
