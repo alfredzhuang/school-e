@@ -10,5 +10,5 @@
   "background": {
     "scripts": ["background.js", "jsrsasign-all-min.js"]
   },
-  "permissions": ["identity"]
+  "permissions": ["identity", "http://localhost:3000/"]
 }

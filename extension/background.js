@@ -49,6 +49,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               { popup: "/pages/signedin.html" },
               function () {
                 signed_in = true;
+                fetch("http://localhost:3000/login", {
+                  method: "GET",
+                  headers: {
+                    Authorization: "Basic " + btoa(`${user_info.sub}`),
+                  },
+                })
+                  .then((res) => {
+                    return new Promise((resolve) => {
+                      if (res !== 200) resolve("fail");
+                      resolve("success");
+                    });
+                  })
+                  .catch((err) => console.log(err));
                 sendResponse("success");
               }
             );
