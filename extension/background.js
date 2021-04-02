@@ -60,10 +60,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                   },
                 })
                   .then((res) => {
-                    return new Promise((resolve) => {
-                      if (res !== 200) resolve("fail");
-                      resolve("success");
-                    });
+                    if (res.status !== 200)
+                      console.log("user was not added to database");
                   })
                   .catch((err) => console.log(err));
                 sendResponse("success");
@@ -99,12 +97,25 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }),
     })
       .then((res) => {
-        return new Promise((resolve) => {
-          if (res !== 200) resolve("fail");
-          resolve("success");
-        });
+        if (res.status !== 200) console.log("class was not added");
       })
       .catch((err) => console.log(err));
     sendResponse("success");
+  } else if (request.message === "getclasses") {
+    // Retrieve the classes of the user
+    fetch("http://localhost:3000/getclasses", {
+      method: "GET",
+      headers: {
+        Authorization: "Basic " + btoa(`${userid}`),
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        sendResponse(json);
+      })
+      .catch((err) => console.log(err));
+    return true;
   }
 });

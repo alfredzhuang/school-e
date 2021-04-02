@@ -18,8 +18,8 @@ app.get("/login", function (req, res) {
         newUser.save();
       }
     });
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
   res.status(200).end();
 });
@@ -39,10 +39,23 @@ app.post("/addclass", function (req, res) {
         }
       }
     );
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
   res.status(200).end();
+});
+
+app.get("/getclasses", function (req, res) {
+  let creds = req.get("Authorization");
+  creds = creds.substr(creds.indexOf(" ") + 1);
+  creds = Buffer.from(creds, "base64").toString("binary");
+  try {
+    User.find({ userid: creds }, function (err, user) {
+      res.send(user[0].classes);
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.use(function (req, res) {
