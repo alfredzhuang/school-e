@@ -1,4 +1,6 @@
 let signed_in = false;
+let userid = "";
+
 const CLIENT_ID = encodeURIComponent("");
 const RESPONSE_TYPE = encodeURIComponent("id_token");
 const REDIRECT_URI = encodeURIComponent("");
@@ -49,6 +51,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               { popup: "/pages/signedin.html" },
               function () {
                 signed_in = true;
+                userid = user_info.sub;
                 // Add to database
                 fetch("http://localhost:3000/login", {
                   method: "GET",
@@ -77,12 +80,31 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // Log the user out
     chrome.browserAction.setPopup({ popup: "/pages/signin.html" }, function () {
       signed_in = false;
+      userid = "";
       sendResponse("success");
     });
     return true;
   } else if (request.message === "addclass") {
     // Add the class to database
-    console.log(request.className + " " + request.classLink);
+    fetch("http://localhost:3000/addclass", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        classLink: request.classLink,
+        className: request.className,
+        userid: userid,
+      }),
+    })
+      .then((res) => {
+        return new Promise((resolve) => {
+          if (res !== 200) resolve("fail");
+          resolve("success");
+        });
+      })
+      .catch((err) => console.log(err));
     sendResponse("success");
   }
 });
