@@ -17,6 +17,7 @@ chrome.runtime.sendMessage({ message: "getclasses" }, function (response) {
   });
 });
 
+// Sign out button
 document.querySelector("#sign-out").addEventListener("click", function () {
   chrome.runtime.sendMessage({ message: "logout" }, function (response) {
     if (response === "success") {
@@ -25,11 +26,13 @@ document.querySelector("#sign-out").addEventListener("click", function () {
   });
 });
 
+// Add class button
 document.querySelector("#addclass").addEventListener("click", function () {
   chrome.browserAction.setPopup({ popup: "../pages/addClass.html" });
   window.location.href = "../pages/addClass.html";
 });
 
+// Function for the delete button
 function deleteClass(classId) {
   chrome.runtime.sendMessage(
     { message: "deleteclass", classId: classId },

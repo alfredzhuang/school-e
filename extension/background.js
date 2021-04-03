@@ -118,6 +118,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       .catch((err) => console.log(err));
     return true;
   } else if (request.message === "deleteclass") {
+    // Delete the class from the database
     fetch("http://localhost:3000/deleteclass", {
       method: "POST",
       headers: {
