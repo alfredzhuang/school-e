@@ -117,5 +117,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })
       .catch((err) => console.log(err));
     return true;
+  } else if (request.message === "deleteclass") {
+    fetch("http://localhost:3000/deleteclass", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        classId: request.classId,
+        userid: userid,
+      }),
+    })
+      .then((res) => {
+        if (res.status !== 200) console.log("class was not deleted");
+      })
+      .catch((err) => console.log(err));
+    sendResponse("success");
   }
 });

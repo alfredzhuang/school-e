@@ -1,4 +1,5 @@
 import express from "express";
+import { v4 as uuidv4 } from "uuid";
 import User from "./database.js";
 
 let app = express();
@@ -27,13 +28,33 @@ app.get("/login", function (req, res) {
 app.post("/addclass", function (req, res) {
   try {
     let newClass = {
+      classId: uuidv4(),
       className: req.body.className,
       classLink: req.body.classLink,
     };
     User.updateOne(
       { userid: req.body.userid },
       { $push: { classes: newClass } },
-      function (err, user) {
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).end();
+});
+
+app.post("/deleteclass", function (req, res) {
+  try {
+    User.updateOne(
+      { userid: req.body.userid },
+      {
+        $pull: { classes: { classId: req.body.classId } },
+      },
+      function (err, result) {
         if (err) {
           console.log(err);
         }
