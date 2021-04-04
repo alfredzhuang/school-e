@@ -1,0 +1,38 @@
+div {
+  width: 250px;
+}
+
+.login-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+}
+
+.login-button {
+  width: 225px;
+}
+
+.signedin-div {
+  width: 250px;
+}
+
+#classes {
+  margin-bottom: 25px;
+}
+
+.class-element {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;
+  margin: 2px 0;
+}
+
+.delete-button {
+  height: 20px;
+}
+
+#submit {
+  margin-top: 10px;
+}

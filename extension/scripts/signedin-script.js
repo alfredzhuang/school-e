@@ -5,9 +5,24 @@ let classes = [];
 chrome.runtime.sendMessage({ message: "getclasses" }, function (response) {
   classes = response;
   classes.forEach(function (oneClass) {
+    // Create div
     const div = document.createElement("div");
-    div.textContent = `${oneClass.className}: ${oneClass.classLink}`;
+    div.className = "class-element";
+    // Create paragraph element for class and its link
+    const text = document.createElement("p");
+    // Create link for the class link
+    const link = document.createElement("a");
+    link.href = oneClass.classLink;
+    link.onclick = function () {
+      chrome.tabs.create({ url: oneClass.classLink });
+    };
+    link.textContent = `${oneClass.classLink}`;
+    text.textContent = `${oneClass.className}: `;
+    text.appendChild(link);
+    div.appendChild(text);
+    // Create button to delete the class
     const button = document.createElement("button");
+    button.className = "delete-button";
     button.textContent = `Delete`;
     button.onclick = function () {
       deleteClass(oneClass.classId);
