@@ -1,3 +1,13 @@
+// Import current link anchor tag
+chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+  document.querySelector("#import-link").href = tabs[0].url;
+});
+document.querySelector("#import-link").addEventListener("click", function () {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    document.querySelector("#classLink").value = tabs[0].url;
+  });
+});
+
 // Return button
 document.querySelector("#return").addEventListener("click", function () {
   chrome.browserAction.setPopup({ popup: "../pages/signedin.html" });
