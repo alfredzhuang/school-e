@@ -27,10 +27,16 @@ app.get("/login", function (req, res) {
 
 app.post("/addclass", function (req, res) {
   try {
+    let classLink = req.body.classLink;
+    if (
+      classLink.substring(0, 7) !== "http://" ||
+      classLink.substring(0, 8) !== "https://"
+    )
+      classLink = "http://" + classLink;
     let newClass = {
       classId: uuidv4(),
       className: req.body.className,
-      classLink: req.body.classLink,
+      classLink: classLink,
     };
     User.updateOne(
       { userid: req.body.userid },

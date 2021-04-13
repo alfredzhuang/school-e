@@ -1,0 +1,51 @@
+div {
+  width: 250px;
+}
+
+.login-heading {
+  text-align: center;
+  padding-top: 15px;
+}
+
+.login-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.login-button {
+  width: 225px;
+}
+
+.signedin-div {
+  width: 250px;
+}
+
+.signedin-buttons {
+  text-align: center;
+}
+
+#classes {
+  margin-bottom: 25px;
+}
+
+.class-element {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;
+  margin: 2px 0;
+  padding: 0px 3px;
+}
+
+.delete-button {
+  background-color: red;
+  border: none;
+  height: 20px;
+  border-radius: 5px;
+}
+
+#submit {
+  margin-top: 10px;
+}

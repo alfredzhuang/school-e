@@ -1,14 +1,14 @@
 {
-  "name": "extension",
+  "name": "School Link Storage",
   "version": "1.0",
   "manifest_version": 2,
   "key": "",
   "browser_action": {
     "default_popup": "/pages/signin.html",
-    "default_title": "extension"
+    "default_title": "School Link Storage"
   },
   "background": {
     "scripts": ["background.js", "jsrsasign-all-min.js"]
   },
-  "permissions": ["identity", "http://localhost:3000/"]
+  "permissions": ["identity", "http://localhost:3000/", "tabs"]
 }
