@@ -93,6 +93,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       body: JSON.stringify({
         classLink: request.classLink,
         className: request.className,
+        classPassword: request.classPassword,
         userid: userid,
       }),
     })

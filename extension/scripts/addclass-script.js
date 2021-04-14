@@ -18,12 +18,19 @@ document.querySelector("#return").addEventListener("click", function () {
 document.querySelector("#submit").addEventListener("click", function () {
   let className = document.querySelector("#className").value;
   let classLink = document.querySelector("#classLink").value;
+  let classPassword = document.querySelector("#classPassword").value;
   chrome.runtime.sendMessage(
-    { message: "addclass", className: className, classLink: classLink },
+    {
+      message: "addclass",
+      className: className,
+      classLink: classLink,
+      classPassword: classPassword,
+    },
     function (response) {
       if (response === "success") {
         document.querySelector("#className").value = "";
         document.querySelector("#classLink").value = "";
+        document.querySelector("#classPassword").value = "";
       }
     }
   );

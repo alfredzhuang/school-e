@@ -19,10 +19,11 @@ div {
 }
 
 .signedin-div {
-  width: 250px;
+  width: 350px;
 }
 
 .signedin-buttons {
+  width: 350px;
   text-align: center;
 }
 
@@ -34,7 +35,7 @@ div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 250px;
+  width: 350px;
   margin: 2px 0;
   padding: 0px 3px;
 }

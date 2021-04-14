@@ -19,6 +19,13 @@ chrome.runtime.sendMessage({ message: "getclasses" }, function (response) {
     link.textContent = `${oneClass.classLink}`;
     text.textContent = `${oneClass.className}: `;
     text.appendChild(link);
+    // Create paragraph element for password if there is one
+    if (oneClass.classPassword !== "") {
+      const password = document.createElement("p");
+      password.textContent = `Password: ${oneClass.classPassword}`;
+      text.appendChild(password);
+      // Add copy to clipboard option
+    }
     div.appendChild(text);
     // Create button to delete the class
     const button = document.createElement("button");
