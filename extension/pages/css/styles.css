@@ -47,6 +47,10 @@ div {
   border-radius: 5px;
 }
 
+.copy-button {
+  height: 20px;
+}
+
 #submit {
   margin-top: 10px;
 }
