@@ -10,6 +10,7 @@ chrome.runtime.sendMessage({ message: "getclasses" }, function (response) {
     div.className = "class-element";
     // Create paragraph element for class and its link
     const text = document.createElement("p");
+    text.textContent = `${oneClass.className}: `;
     // Create link for the class link
     const link = document.createElement("a");
     link.href = oneClass.classLink;
@@ -17,8 +18,21 @@ chrome.runtime.sendMessage({ message: "getclasses" }, function (response) {
       chrome.tabs.create({ url: oneClass.classLink });
     };
     link.textContent = `${oneClass.classLink}`;
-    text.textContent = `${oneClass.className}: `;
     text.appendChild(link);
+    // Create paragraph element for password if there is one
+    if (oneClass.classPassword !== "") {
+      const password = document.createElement("p");
+      password.textContent = `Password: ${oneClass.classPassword} `;
+      // Add copy to clipboard option
+      const copy = document.createElement("button");
+      copy.textContent = "Copy text";
+      copy.className = "copy-button";
+      copy.onclick = function () {
+        copyText(oneClass.classPassword);
+      };
+      password.appendChild(copy);
+      text.appendChild(password);
+    }
     div.appendChild(text);
     // Create button to delete the class
     const button = document.createElement("button");
@@ -57,4 +71,15 @@ function deleteClass(classId) {
       }
     }
   );
+}
+
+// Function for copy text button
+function copyText(classPassword) {
+  const temp = document.createElement("textarea");
+  temp.textContent = classPassword;
+  document.body.appendChild(temp);
+  temp.select();
+  document.execCommand("copy");
+  temp.blur();
+  document.body.removeChild(temp);
 }
