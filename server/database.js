@@ -10,6 +10,7 @@ mongoose.connect(process.env.MONGODB, {
 let usersSchema = new mongoose.Schema({
   userid: String,
   classes: [Object],
+  tasks: [Object],
 });
 
 let User = mongoose.model("User", usersSchema);

@@ -136,5 +136,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })
       .catch((err) => console.log(err));
     sendResponse("success");
+  } else if (request.message === "addTask") {
+    // Add the task to the database
+    fetch("http://localhost:3000/addtask", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        taskName: request.taskName,
+        userid: userid,
+      }),
+    })
+      .then((res) => {
+        if (res.status !== 200) console.log("task was not added");
+      })
+      .catch((err) => console.log(err));
+    sendResponse("success");
   }
 });

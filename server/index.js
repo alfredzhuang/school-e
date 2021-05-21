@@ -15,6 +15,7 @@ app.get("/login", function (req, res) {
         let newUser = new User({
           userid: creds,
           classes: [],
+          tasks: [],
         });
         newUser.save();
       }
@@ -84,6 +85,28 @@ app.get("/getclasses", function (req, res) {
   } catch (err) {
     console.log(err);
   }
+});
+
+app.post("/addtask", function (req, res) {
+  try {
+    let taskName = req.body.taskName;
+    let newTask = {
+      taskId: uuidv4(),
+      taskName: taskName,
+    };
+    User.updateOne(
+      { userid: req.body.userid },
+      { $push: { tasks: newTask } },
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).end();
 });
 
 app.use(function (req, res) {
