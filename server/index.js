@@ -15,6 +15,7 @@ app.get("/login", function (req, res) {
         let newUser = new User({
           userid: creds,
           classes: [],
+          tasks: [],
         });
         newUser.save();
       }
@@ -80,6 +81,60 @@ app.get("/getclasses", function (req, res) {
   try {
     User.find({ userid: creds }, function (err, user) {
       res.send(user[0].classes);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post("/addtask", function (req, res) {
+  try {
+    let taskName = req.body.taskName;
+    let newTask = {
+      taskId: uuidv4(),
+      taskName: taskName,
+    };
+    User.updateOne(
+      { userid: req.body.userid },
+      { $push: { tasks: newTask } },
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).end();
+});
+
+app.post("/deletetask", function (req, res) {
+  try {
+    User.updateOne(
+      { userid: req.body.userid },
+      {
+        $pull: { tasks: { taskId: req.body.taskId } },
+      },
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).end();
+});
+
+app.get("/gettasks", function (req, res) {
+  let creds = req.get("Authorization");
+  creds = creds.substr(creds.indexOf(" ") + 1);
+  creds = Buffer.from(creds, "base64").toString("binary");
+  try {
+    User.find({ userid: creds }, function (err, user) {
+      res.send(user[0].tasks);
     });
   } catch (err) {
     console.log(err);

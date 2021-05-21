@@ -136,5 +136,57 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })
       .catch((err) => console.log(err));
     sendResponse("success");
+  } else if (request.message === "addTask") {
+    // Add the task to the database
+    fetch("http://localhost:3000/addtask", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        taskName: request.taskName,
+        userid: userid,
+      }),
+    })
+      .then((res) => {
+        if (res.status !== 200) console.log("task was not added");
+      })
+      .catch((err) => console.log(err));
+    sendResponse("success");
+  } else if (request.message === "getTasks") {
+    // Retrieve the tasks of the user
+    fetch("http://localhost:3000/gettasks", {
+      method: "GET",
+      headers: {
+        Authorization: "Basic " + btoa(`${userid}`),
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        sendResponse(json);
+      })
+      .catch((err) => console.log(err));
+    return true;
+  } else if (request.message === "deletetask") {
+    // Delete the task from the database
+    fetch("http://localhost:3000/deletetask", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        taskId: request.taskId,
+        userid: userid,
+      }),
+    })
+      .then((res) => {
+        if (res.status !== 200) console.log("task was not deleted");
+      })
+      .catch((err) => console.log(err));
+    sendResponse("success");
   }
 });
