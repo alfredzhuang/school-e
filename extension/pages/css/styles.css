@@ -2,6 +2,8 @@ div {
   width: 250px;
 }
 
+/* login page */
+
 .login-heading {
   text-align: center;
   padding-top: 15px;
@@ -17,6 +19,8 @@ div {
 .login-button {
   width: 225px;
 }
+
+/* signed in page */
 
 .signedin-div {
   width: 350px;
@@ -53,4 +57,14 @@ div {
 
 #submit {
   margin-top: 10px;
+}
+
+/* to-do list page */
+
+.todolist-div {
+  margin-bottom: 15px;
+}
+
+.todolist-buttons {
+  text-align: center;
 }
