@@ -22,11 +22,20 @@ div {
 
 /* signed in page */
 
-.signedin-div {
+.signedin-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* links page */
+
+.links-div {
   width: 350px;
 }
 
-.signedin-buttons {
+.links-buttons {
   width: 350px;
   text-align: center;
 }
