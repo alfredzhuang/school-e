@@ -7,6 +7,7 @@ chrome.runtime.sendMessage({ message: "getTasks" }, function (response) {
   tasks.forEach(function (oneTask) {
     // Create div
     const div = document.createElement("div");
+    div.className = "task-element";
     // Create paragraph element for each task
     const text = document.createElement("p");
     text.textContent = `${oneTask.taskName}`;
@@ -37,6 +38,7 @@ document.querySelector("#submit").addEventListener("click", function () {
       }
     }
   );
+  window.location.href = "../pages/toDoList.html";
 });
 
 // Return button

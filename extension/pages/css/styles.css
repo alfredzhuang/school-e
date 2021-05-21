@@ -63,8 +63,17 @@ div {
 
 .todolist-input {
   margin-bottom: 15px;
+  text-align: center;
 }
 
 .todolist-buttons {
   text-align: center;
+}
+
+.task-element {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2px 0;
+  padding: 0px 3px;
 }
