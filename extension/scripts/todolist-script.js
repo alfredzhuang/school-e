@@ -1,3 +1,28 @@
+// tasks to be shown in the to-do list
+tasks = [];
+
+// Retrieve the tasks and display them on the page
+chrome.runtime.sendMessage({ message: "getTasks" }, function (response) {
+  tasks = response;
+  tasks.forEach(function (oneTask) {
+    // Create div
+    const div = document.createElement("div");
+    // Create paragraph element for each task
+    const text = document.createElement("p");
+    text.textContent = `${oneTask.taskName}`;
+    div.appendChild(text);
+    // Create button to delete the task
+    const button = document.createElement("button");
+    button.className = "delete-button";
+    button.textContent = `Delete`;
+    button.onclick = function () {
+      deleteTask(oneTask.taskId);
+    };
+    div.appendChild(button);
+    document.querySelector("#todolist-tasks").appendChild(div);
+  });
+});
+
 // Submit button
 document.querySelector("#submit").addEventListener("click", function () {
   let taskName = document.querySelector("#taskName").value;

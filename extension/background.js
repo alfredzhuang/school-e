@@ -154,5 +154,21 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })
       .catch((err) => console.log(err));
     sendResponse("success");
+  } else if (request.message === "getTasks") {
+    // Retrieve the classes of the user
+    fetch("http://localhost:3000/gettasks", {
+      method: "GET",
+      headers: {
+        Authorization: "Basic " + btoa(`${userid}`),
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        sendResponse(json);
+      })
+      .catch((err) => console.log(err));
+    return true;
   }
 });

@@ -109,6 +109,19 @@ app.post("/addtask", function (req, res) {
   res.status(200).end();
 });
 
+app.get("/gettasks", function (req, res) {
+  let creds = req.get("Authorization");
+  creds = creds.substr(creds.indexOf(" ") + 1);
+  creds = Buffer.from(creds, "base64").toString("binary");
+  try {
+    User.find({ userid: creds }, function (err, user) {
+      res.send(user[0].tasks);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.use(function (req, res) {
   res.status(404).send("Route not found");
 });
