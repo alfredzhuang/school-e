@@ -109,6 +109,25 @@ app.post("/addtask", function (req, res) {
   res.status(200).end();
 });
 
+app.post("/deletetask", function (req, res) {
+  try {
+    User.updateOne(
+      { userid: req.body.userid },
+      {
+        $pull: { tasks: { taskId: req.body.taskId } },
+      },
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).end();
+});
+
 app.get("/gettasks", function (req, res) {
   let creds = req.get("Authorization");
   creds = creds.substr(creds.indexOf(" ") + 1);

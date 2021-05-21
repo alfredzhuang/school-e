@@ -155,7 +155,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       .catch((err) => console.log(err));
     sendResponse("success");
   } else if (request.message === "getTasks") {
-    // Retrieve the classes of the user
+    // Retrieve the tasks of the user
     fetch("http://localhost:3000/gettasks", {
       method: "GET",
       headers: {
@@ -170,5 +170,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })
       .catch((err) => console.log(err));
     return true;
+  } else if (request.message === "deletetask") {
+    // Delete the task from the database
+    fetch("http://localhost:3000/deletetask", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        taskId: request.taskId,
+        userid: userid,
+      }),
+    })
+      .then((res) => {
+        if (res.status !== 200) console.log("task was not deleted");
+      })
+      .catch((err) => console.log(err));
+    sendResponse("success");
   }
 });
