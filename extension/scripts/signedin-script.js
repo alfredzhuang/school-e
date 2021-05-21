@@ -61,6 +61,12 @@ document.querySelector("#addclass").addEventListener("click", function () {
   window.location.href = "../pages/addClass.html";
 });
 
+// To do list button
+document.querySelector("#to-do-list").addEventListener("click", function () {
+  chrome.browserAction.setPopup({ popup: "../pages/toDoList.html" });
+  window.location.href = "../pages/toDoList.html";
+});
+
 // Function for the delete button
 function deleteClass(classId) {
   chrome.runtime.sendMessage(
