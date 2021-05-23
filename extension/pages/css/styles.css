@@ -22,13 +22,31 @@ div {
 
 /* signed in page */
 
-.signedin-div {
-  width: 350px;
+.signedin-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.signedin-buttons {
-  width: 350px;
+.signedin-button {
+  margin: 5px 0px;
+}
+
+/* links page */
+
+.links-div {
+  width: 400px;
+}
+
+.links-text {
+  padding-top: 10px;
+}
+
+.links-buttons {
+  width: 400px;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 #classes {
@@ -39,41 +57,43 @@ div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 350px;
-  margin: 2px 0;
-  padding: 0px 3px;
-}
-
-.delete-button {
-  background-color: red;
-  border: none;
-  height: 20px;
-  border-radius: 5px;
-}
-
-.copy-button {
-  height: 20px;
+  width: 400px;
+  padding: 0 5px;
 }
 
 #submit {
   margin-top: 10px;
 }
 
+/* add class page */
+
+.add-class-div {
+  width: 300px;
+}
+
+.add-class-return {
+  margin-top: 10px;
+}
+
 /* to-do list page */
 
 .todolist-input {
-  margin-bottom: 15px;
   text-align: center;
+}
+
+.todolist-add {
+  margin-bottom: 5px;
 }
 
 .todolist-buttons {
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .task-element {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 2px 0;
-  padding: 0px 3px;
+  margin: 3px 0;
+  padding: 0px 5px;
 }

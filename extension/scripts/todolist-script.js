@@ -14,7 +14,7 @@ chrome.runtime.sendMessage({ message: "getTasks" }, function (response) {
     div.appendChild(text);
     // Create button to delete the task
     const button = document.createElement("button");
-    button.className = "delete-button";
+    button.className = "delete-button btn btn-danger btn-sm";
     button.textContent = `Delete`;
     button.onclick = function () {
       deleteTask(oneTask.taskId);
@@ -24,8 +24,8 @@ chrome.runtime.sendMessage({ message: "getTasks" }, function (response) {
   });
 });
 
-// Submit button
-document.querySelector("#submit").addEventListener("click", function () {
+// Add button
+document.querySelector("#add").addEventListener("click", function () {
   let taskName = document.querySelector("#taskName").value;
   chrome.runtime.sendMessage(
     {
