@@ -3,22 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <title>Extension</title>
+    <!-- bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <label>Class</label>
-    <input id="className" type="text" name="className" autocomplete="off" />
-    <label>Link or <a id="import-link">Current Tab</a></label>
-    <input id="classLink" type="text" name="classLink" autocomplete="off" />
-    <label>Password (if zoom link)</label>
-    <input
-      id="classPassword"
-      type="password"
-      name="classPassword"
-      autocomplete="off"
-    />
-    <button id="submit">Submit</button>
-    <button id="return">Return</button>
+    <div class="container">
+      <div class="form-group">
+        <label>Class</label>
+        <input
+          class="form-control"
+          id="className"
+          type="text"
+          name="className"
+          autocomplete="off"
+        />
+        <label>Link or <a id="import-link">Current Tab</a></label>
+        <input
+          class="form-control"
+          id="classLink"
+          type="text"
+          name="classLink"
+          autocomplete="off"
+        />
+        <label>Password (if zoom link)</label>
+        <input
+          class="form-control"
+          id="classPassword"
+          type="password"
+          name="classPassword"
+          autocomplete="off"
+        />
+        <button id="submit" class="btn btn-success btn-sm">Submit</button>
+        <button id="return" class="add-class-return btn btn-dark btn-sm">
+          Return
+        </button>
+      </div>
+    </div>
     <script src="../scripts/addclass-script.js"></script>
   </body>
 </html>

@@ -3,16 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <title>Extension</title>
+        <!-- bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
     <div id="todolist-tasks"></div>
-    <div class="todolist-input">
+    <div class="form-outline todolist-input">
     <input id="taskName" type="text" name="taskName" autocomplete="off" />
-    <button id="submit">Submit</button>
+    <button class="btn btn-success btn-sm todolist-add" id="add">Add</button>
     </div>
+  
     <div class="todolist-buttons">
-        <button id="return">Return</button>
+        <button class="btn btn-dark btn-sm" id="return">Return</button>
     </div>
       <script src="../scripts/todolist-script.js"></script>
     </div>

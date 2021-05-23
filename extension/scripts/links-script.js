@@ -9,7 +9,8 @@ chrome.runtime.sendMessage({ message: "getclasses" }, function (response) {
     const div = document.createElement("div");
     div.className = "class-element";
     // Create paragraph element for class and its link
-    const text = document.createElement("p");
+    const text = document.createElement("div");
+    text.className = "links-text";
     text.textContent = `${oneClass.className}: `;
     // Create link for the class link
     const link = document.createElement("a");
@@ -26,7 +27,7 @@ chrome.runtime.sendMessage({ message: "getclasses" }, function (response) {
       // Add copy to clipboard option
       const copy = document.createElement("button");
       copy.textContent = "Copy text";
-      copy.className = "copy-button";
+      copy.className = "btn btn-secondary btn-sm";
       copy.onclick = function () {
         copyText(oneClass.classPassword);
       };
@@ -36,7 +37,7 @@ chrome.runtime.sendMessage({ message: "getclasses" }, function (response) {
     div.appendChild(text);
     // Create button to delete the class
     const button = document.createElement("button");
-    button.className = "delete-button";
+    button.className = "btn btn-danger btn-sm delete-button";
     button.textContent = `Delete`;
     button.onclick = function () {
       deleteClass(oneClass.classId);
