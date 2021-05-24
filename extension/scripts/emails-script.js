@@ -10,7 +10,23 @@ chrome.runtime.sendMessage({ message: "getemails" }, function (response) {
     div.className = "email-element";
     // Create paragraph element for each email
     const text = document.createElement("p");
-    text.textContent = `${oneEmail.email}`;
+    text.className = "email-text";
+    // Create link for the class link
+    const link = document.createElement("a");
+    link.href = oneEmail.email;
+    link.onclick = function () {
+      chrome.tabs.create({ url: "mailto:" + oneEmail.email });
+    };
+    link.textContent = `${oneEmail.email} `;
+    text.appendChild(link);
+    // Add copy to clipboard option
+    const copy = document.createElement("button");
+    copy.textContent = "Copy text";
+    copy.className = "btn btn-secondary btn-sm copy-btn";
+    copy.onclick = function () {
+      copyText(oneEmail.email);
+    };
+    text.appendChild(copy);
     div.appendChild(text);
     // Create button to delete the email
     const button = document.createElement("button");
@@ -57,4 +73,15 @@ function deleteEmail(emailId) {
       }
     }
   );
+}
+
+// Function for copy text button
+function copyText(email) {
+  const temp = document.createElement("textarea");
+  temp.textContent = email;
+  document.body.appendChild(temp);
+  temp.select();
+  document.execCommand("copy");
+  temp.blur();
+  document.body.removeChild(temp);
 }
