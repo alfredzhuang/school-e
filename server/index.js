@@ -164,6 +164,38 @@ app.post("/addemail", function (req, res) {
   res.status(200).end();
 });
 
+app.post("/deleteemail", function (req, res) {
+  try {
+    User.updateOne(
+      { userid: req.body.userid },
+      {
+        $pull: { emails: { emailId: req.body.emailId } },
+      },
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).end();
+});
+
+app.get("/getemails", function (req, res) {
+  let creds = req.get("Authorization");
+  creds = creds.substr(creds.indexOf(" ") + 1);
+  creds = Buffer.from(creds, "base64").toString("binary");
+  try {
+    User.find({ userid: creds }, function (err, user) {
+      res.send(user[0].emails);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.use(function (req, res) {
   res.status(404).send("Route not found");
 });
