@@ -2,7 +2,7 @@
 tasks = [];
 
 // Retrieve the tasks and display them on the page
-chrome.runtime.sendMessage({ message: "getTasks" }, function (response) {
+chrome.runtime.sendMessage({ message: "gettasks" }, function (response) {
   tasks = response;
   tasks.forEach(function (oneTask) {
     // Create div
@@ -29,7 +29,7 @@ document.querySelector("#add").addEventListener("click", function () {
   let taskName = document.querySelector("#taskName").value;
   chrome.runtime.sendMessage(
     {
-      message: "addTask",
+      message: "addtask",
       taskName: taskName,
     },
     function (response) {

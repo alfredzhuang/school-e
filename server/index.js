@@ -16,6 +16,7 @@ app.get("/login", function (req, res) {
           userid: creds,
           classes: [],
           tasks: [],
+          emails: [],
         });
         newUser.save();
       }
@@ -139,6 +140,28 @@ app.get("/gettasks", function (req, res) {
   } catch (err) {
     console.log(err);
   }
+});
+
+app.post("/addemail", function (req, res) {
+  try {
+    let email = req.body.email;
+    let newEmail = {
+      emailId: uuidv4(),
+      email: email,
+    };
+    User.updateOne(
+      { userid: req.body.userid },
+      { $push: { emails: newEmail } },
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).end();
 });
 
 app.use(function (req, res) {
