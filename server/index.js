@@ -16,6 +16,7 @@ app.get("/login", function (req, res) {
           userid: creds,
           classes: [],
           tasks: [],
+          emails: [],
         });
         newUser.save();
       }
@@ -135,6 +136,60 @@ app.get("/gettasks", function (req, res) {
   try {
     User.find({ userid: creds }, function (err, user) {
       res.send(user[0].tasks);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post("/addemail", function (req, res) {
+  try {
+    let email = req.body.email;
+    let newEmail = {
+      emailId: uuidv4(),
+      email: email,
+    };
+    User.updateOne(
+      { userid: req.body.userid },
+      { $push: { emails: newEmail } },
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).end();
+});
+
+app.post("/deleteemail", function (req, res) {
+  try {
+    User.updateOne(
+      { userid: req.body.userid },
+      {
+        $pull: { emails: { emailId: req.body.emailId } },
+      },
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  res.status(200).end();
+});
+
+app.get("/getemails", function (req, res) {
+  let creds = req.get("Authorization");
+  creds = creds.substr(creds.indexOf(" ") + 1);
+  creds = Buffer.from(creds, "base64").toString("binary");
+  try {
+    User.find({ userid: creds }, function (err, user) {
+      res.send(user[0].emails);
     });
   } catch (err) {
     console.log(err);

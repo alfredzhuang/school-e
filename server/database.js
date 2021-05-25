@@ -11,6 +11,7 @@ let usersSchema = new mongoose.Schema({
   userid: String,
   classes: [Object],
   tasks: [Object],
+  emails: [Object],
 });
 
 let User = mongoose.model("User", usersSchema);

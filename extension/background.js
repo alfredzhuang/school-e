@@ -136,7 +136,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })
       .catch((err) => console.log(err));
     sendResponse("success");
-  } else if (request.message === "addTask") {
+  } else if (request.message === "addtask") {
     // Add the task to the database
     fetch("http://localhost:3000/addtask", {
       method: "POST",
@@ -154,7 +154,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })
       .catch((err) => console.log(err));
     sendResponse("success");
-  } else if (request.message === "getTasks") {
+  } else if (request.message === "gettasks") {
     // Retrieve the tasks of the user
     fetch("http://localhost:3000/gettasks", {
       method: "GET",
@@ -185,6 +185,58 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     })
       .then((res) => {
         if (res.status !== 200) console.log("task was not deleted");
+      })
+      .catch((err) => console.log(err));
+    sendResponse("success");
+  } else if (request.message === "addemail") {
+    // Add the email to the database
+    fetch("http://localhost:3000/addemail", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: request.email,
+        userid: userid,
+      }),
+    })
+      .then((res) => {
+        if (res.status !== 200) console.log("email was not added");
+      })
+      .catch((err) => console.log(err));
+    sendResponse("success");
+  } else if (request.message === "getemails") {
+    // Retrieve the emails of the user
+    fetch("http://localhost:3000/getemails", {
+      method: "GET",
+      headers: {
+        Authorization: "Basic " + btoa(`${userid}`),
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        sendResponse(json);
+      })
+      .catch((err) => console.log(err));
+    return true;
+  } else if (request.message === "deleteemail") {
+    // Delete the email from the database
+    fetch("http://localhost:3000/deleteemail", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailId: request.emailId,
+        userid: userid,
+      }),
+    })
+      .then((res) => {
+        if (res.status !== 200) console.log("email was not deleted");
       })
       .catch((err) => console.log(err));
     sendResponse("success");
