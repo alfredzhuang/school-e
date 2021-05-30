@@ -6,5 +6,4 @@
 
 ## How It Works
 <p>First, users must log in with google</p>
-<p>Once logged in, the home page will list the user's already existing links. Here, users can logout, or delete and add new links.</p>
-<p>Each link can be clicked on to open it in a new tab and any links that have passwords can be copied to the user's clipboard</p>
+<p>Once logged in, the home page has a main menu. Here, users can logout, go to the to-do list page, go to the links page or go to the emails page.</p>
