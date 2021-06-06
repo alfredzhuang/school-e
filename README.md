@@ -1,4 +1,4 @@
-<h1 align="center">School Link Storage</h1>
+<h1 align="center">School-E</h1>
 
 ## Technologies Used
 <p>Frontend: HTML, CSS, DOM</p>
