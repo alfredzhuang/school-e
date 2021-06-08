@@ -6,7 +6,7 @@
 
 ## Technologies Used
 <p>Frontend: HTML, CSS, DOM</p>
-<p>Backend: Javascript, Node.js, MongoDB, Express, OAuth, Chrome API</p>
+<p>Backend: Javascript, Node.js, MongoDB, Express, OAuth, Chrome API, Fetch API</p>
 
 ## How It Works
 <p>First, users must log in with google</p>
