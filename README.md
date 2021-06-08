@@ -1,5 +1,9 @@
 <h1 align="center">School-E</h1>
 
+<p align="center">
+  <img src="/images/schoole.jpg">
+</p>
+
 ## Technologies Used
 <p>Frontend: HTML, CSS, DOM</p>
 <p>Backend: Javascript, Node.js, MongoDB, Express, OAuth, Chrome API</p>
